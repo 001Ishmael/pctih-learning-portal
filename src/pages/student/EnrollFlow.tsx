@@ -8,7 +8,7 @@ import type { Course, Workshop, PromoCode } from '../../lib/types';
 import { formatMoney } from '../../lib/format';
 import { Spinner, ErrorState } from '../../components/ui/States';
 
-const ORANGE_MONEY_NUMBER = import.meta.env.VITE_ORANGE_MONEY_NUMBER ?? '+232 79 468 780';
+const FALLBACK_ORANGE_MONEY_NUMBER = import.meta.env.VITE_ORANGE_MONEY_NUMBER ?? '+232 79 468 780';
 
 export default function EnrollFlow() {
   const [params] = useSearchParams();
@@ -22,6 +22,7 @@ export default function EnrollFlow() {
   const [step, setStep] = useState<'confirm' | 'payment' | 'done'>('confirm');
   const [enrollmentId, setEnrollmentId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [orangeMoneyNumber, setOrangeMoneyNumber] = useState(FALLBACK_ORANGE_MONEY_NUMBER);
 
   const [promoInput, setPromoInput] = useState('');
   const [promo, setPromo] = useState<PromoCode | null>(null);
@@ -36,6 +37,9 @@ export default function EnrollFlow() {
     supabase.from(table).select('*').eq('id', id).single().then(({ data }) => {
       setItem(data);
       setLoading(false);
+    });
+    supabase.from('settings').select('value').eq('key', 'orange_money_number').maybeSingle().then(({ data }) => {
+      if (data?.value) setOrangeMoneyNumber(typeof data.value === 'string' ? data.value : JSON.stringify(data.value));
     });
   }, [type, id]);
 
@@ -169,8 +173,8 @@ export default function EnrollFlow() {
         <div className="card p-5 mb-6 bg-brand-50 border-brand-200">
           <p className="text-sm text-gray-600 mb-1">Send payment to:</p>
           <div className="flex items-center gap-2">
-            <p className="text-xl font-bold text-navy">{ORANGE_MONEY_NUMBER}</p>
-            <button type="button" onClick={() => { navigator.clipboard.writeText(ORANGE_MONEY_NUMBER); toast.success('Copied!'); }}>
+            <p className="text-xl font-bold text-navy">{orangeMoneyNumber}</p>
+            <button type="button" onClick={() => { navigator.clipboard.writeText(orangeMoneyNumber); toast.success('Copied!'); }}>
               <Copy className="h-4 w-4 text-gray-500" />
             </button>
           </div>

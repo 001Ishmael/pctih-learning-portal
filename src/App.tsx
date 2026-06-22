@@ -36,6 +36,8 @@ import AdminCertificates from './pages/admin/AdminCertificates';
 import AdminLeads from './pages/admin/AdminLeads';
 import AdminPromoCodes from './pages/admin/AdminPromoCodes';
 import AdminReferrals from './pages/admin/AdminReferrals';
+import AdminSettings from './pages/admin/AdminSettings';
+import WorkshopCheckIn from './pages/admin/WorkshopCheckIn';
 import FinanceReports from './pages/admin/FinanceReports';
 
 import TrainerDashboard from './pages/trainer/TrainerDashboard';
@@ -105,6 +107,8 @@ export default function App() {
             <Route path="leads" element={<AdminLeads />} />
             <Route path="promo-codes" element={<AdminPromoCodes />} />
             <Route path="referrals" element={<AdminReferrals />} />
+            <Route path="check-in" element={<WorkshopCheckIn />} />
+            <Route path="settings" element={<AdminSettings />} />
           </Route>
 
           <Route

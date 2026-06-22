@@ -120,7 +120,20 @@ vercel
 3. Add the environment variables from `.env.example` under **Project Settings > Environment Variables**.
 4. Deploy. `vercel.json` is already configured to rewrite all routes to `index.html` for client-side routing.
 
-## 8. Notifications
+## 8. Referrals, Workshop Check-In & Settings
+
+- **Referrals**: every student gets a referral code/link at **My Dashboard > Referrals**; signing up with
+  `?ref=CODE` links the new student to their referrer (tracked in the `referrals` table). Admins see a
+  leaderboard and full log at **Admin > Referrals**.
+- **QR Check-In**: students with an active workshop enrollment can show a QR code (encoding their
+  enrollment ID) from **My Enrollments**. Staff scan it at **Admin > Workshop Check-In** (camera-based via
+  the browser's `BarcodeDetector` API where supported, with a manual ID-entry fallback) to mark same-day
+  attendance.
+- **Settings**: **Admin > Settings** edits organization name/address/contact info and the Orange Money
+  number in the `settings` table. The payment flow reads the Orange Money number from this table at
+  runtime (falling back to `VITE_ORANGE_MONEY_NUMBER` if unset), so updates here take effect immediately.
+
+## 9. Notifications
 
 In-app notifications (registration received, payment pending/approved/rejected, certificate issued)
 are written to the `notifications` table and shown in the student dashboard. Email delivery is not
@@ -128,7 +141,7 @@ yet wired up — to add it, call a Supabase Edge Function or a service like Rese
 row is inserted into `notifications` (e.g. via a Postgres trigger + `pg_net`, or from the client after
 each insert).
 
-## 9. Security Notes
+## 10. Security Notes
 
 - All tables have Row Level Security enabled (see `supabase/schema.sql`).
 - Students can only read/write their own enrollments, payments, and notifications.

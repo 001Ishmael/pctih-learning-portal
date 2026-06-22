@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Download } from 'lucide-react';
+import { Download, QrCode } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../lib/AuthContext';
 import type { Enrollment } from '../../lib/types';
 import { StatusBadge } from '../../components/ui/Badge';
 import { Spinner, EmptyState } from '../../components/ui/States';
 import { formatDate, formatMoney } from '../../lib/format';
+import QrCodeModal from '../../components/QrCodeModal';
 
 export default function MyEnrollments() {
   const { profile } = useAuth();
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [qrEnrollment, setQrEnrollment] = useState<Enrollment | null>(null);
 
   useEffect(() => {
     if (!profile) return;
@@ -77,10 +79,15 @@ export default function MyEnrollments() {
                   <td className="px-4 py-3 capitalize">{e.registerable_type}</td>
                   <td className="px-4 py-3"><StatusBadge status={e.status} /></td>
                   <td className="px-4 py-3 text-gray-500">{formatDate(e.enrolled_at)}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 flex gap-2">
                     {e.payments?.some((p) => p.status === 'approved') && (
                       <button onClick={() => downloadReceipt(e)} className="btn-ghost text-brand-600">
                         <Download className="h-4 w-4" /> Receipt
+                      </button>
+                    )}
+                    {e.registerable_type === 'workshop' && e.status === 'active' && (
+                      <button onClick={() => setQrEnrollment(e)} className="btn-ghost text-brand-600">
+                        <QrCode className="h-4 w-4" /> Check-In QR
                       </button>
                     )}
                   </td>
@@ -89,6 +96,14 @@ export default function MyEnrollments() {
             </tbody>
           </table>
         </div>
+      )}
+
+      {qrEnrollment && (
+        <QrCodeModal
+          value={qrEnrollment.id}
+          title={qrEnrollment.workshops?.title ?? 'Workshop Check-In'}
+          onClose={() => setQrEnrollment(null)}
+        />
       )}
     </div>
   );
