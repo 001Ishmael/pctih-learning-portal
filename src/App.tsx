@@ -23,6 +23,7 @@ import MyEnrollments from './pages/student/MyEnrollments';
 import MySchedule from './pages/student/MySchedule';
 import MyCertificates from './pages/student/MyCertificates';
 import MyNotifications from './pages/student/MyNotifications';
+import MyReferrals from './pages/student/MyReferrals';
 
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminHome from './pages/admin/AdminHome';
@@ -34,6 +35,7 @@ import AdminTrainers from './pages/admin/AdminTrainers';
 import AdminCertificates from './pages/admin/AdminCertificates';
 import AdminLeads from './pages/admin/AdminLeads';
 import AdminPromoCodes from './pages/admin/AdminPromoCodes';
+import AdminReferrals from './pages/admin/AdminReferrals';
 import FinanceReports from './pages/admin/FinanceReports';
 
 import TrainerDashboard from './pages/trainer/TrainerDashboard';
@@ -81,6 +83,7 @@ export default function App() {
             <Route path="enrollments" element={<MyEnrollments />} />
             <Route path="schedule" element={<MySchedule />} />
             <Route path="certificates" element={<MyCertificates />} />
+            <Route path="referrals" element={<MyReferrals />} />
             <Route path="notifications" element={<MyNotifications />} />
           </Route>
 
@@ -101,6 +104,7 @@ export default function App() {
             <Route path="certificates" element={<AdminCertificates />} />
             <Route path="leads" element={<AdminLeads />} />
             <Route path="promo-codes" element={<AdminPromoCodes />} />
+            <Route path="referrals" element={<AdminReferrals />} />
           </Route>
 
           <Route

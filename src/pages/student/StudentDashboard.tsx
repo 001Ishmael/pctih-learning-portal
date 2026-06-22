@@ -1,4 +1,4 @@
-import { LayoutDashboard, BookOpen, CalendarDays, Bell, Award } from 'lucide-react';
+import { LayoutDashboard, BookOpen, CalendarDays, Bell, Award, Gift } from 'lucide-react';
 import DashboardLayout from '../../components/DashboardLayout';
 
 const navItems = [
@@ -6,6 +6,7 @@ const navItems = [
   { to: '/student/enrollments', label: 'My Enrollments', icon: <BookOpen className="h-4 w-4" /> },
   { to: '/student/schedule', label: 'My Schedule', icon: <CalendarDays className="h-4 w-4" /> },
   { to: '/student/certificates', label: 'Certificates', icon: <Award className="h-4 w-4" /> },
+  { to: '/student/referrals', label: 'Referrals', icon: <Gift className="h-4 w-4" /> },
   { to: '/student/notifications', label: 'Notifications', icon: <Bell className="h-4 w-4" /> },
 ];
 

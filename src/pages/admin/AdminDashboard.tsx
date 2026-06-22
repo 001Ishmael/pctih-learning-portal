@@ -1,5 +1,5 @@
 import {
-  LayoutDashboard, BookOpen, CalendarDays, CreditCard, ClipboardList, Users, Tag, Award, GraduationCap,
+  LayoutDashboard, BookOpen, CalendarDays, CreditCard, ClipboardList, Users, Tag, Award, GraduationCap, Gift,
 } from 'lucide-react';
 import DashboardLayout from '../../components/DashboardLayout';
 import { useAuth } from '../../lib/AuthContext';
@@ -23,6 +23,7 @@ export default function AdminDashboard() {
         { to: '/admin/certificates', label: 'Certificates', icon: <Award className="h-4 w-4" /> },
         { to: '/admin/leads', label: 'Leads', icon: <Users className="h-4 w-4" /> },
         { to: '/admin/promo-codes', label: 'Promo Codes', icon: <Tag className="h-4 w-4" /> },
+        { to: '/admin/referrals', label: 'Referrals', icon: <Gift className="h-4 w-4" /> },
       ];
 
   return <DashboardLayout navItems={navItems} roleLabel={profile?.role.replace('_', ' ') ?? 'Admin'} />;
