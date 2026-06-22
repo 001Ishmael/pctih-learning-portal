@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0a1a3c;
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #d9e6ff;
+  --color-brand-200: #b3ccff;
+  --color-brand-300: #80aaff;
+  --color-brand-400: #4d85ff;
+  --color-brand-500: #1d63f2;
+  --color-brand-600: #144bcc;
+  --color-brand-700: #0f3aa3;
+  --color-brand-800: #0c2d7a;
+  --color-brand-900: #0a1a3c;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+
+.btn, .btn-primary, .btn-outline, .btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700; }
+.btn-outline { @apply border border-brand-600 text-brand-600 hover:bg-brand-50; }
+.btn-ghost { @apply text-gray-700 hover:bg-gray-100; }
+.card { @apply bg-white rounded-xl shadow-sm border border-gray-200; }
+.input { @apply w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500; }
+.label { @apply block text-sm font-medium text-gray-700 mb-1; }
+.badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium; }
